@@ -9,3 +9,7 @@ stop-cluster:
 
 delete-cluster:
 	k3d cluster delete cloudnative-tools-testing
+
+deploy-kubernetes-dashboard:
+	cd ./kubernetes-dashboard/terraform && terraform init && \
+		terraform apply

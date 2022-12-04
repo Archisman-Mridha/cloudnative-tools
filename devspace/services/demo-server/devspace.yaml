@@ -1,0 +1,54 @@
+version: v2beta1
+name: cloudnative-tools
+
+pipelines:
+    #* this is the pipeline for the main command: `devspace dev`
+    dev:
+        run: |-
+
+            #* deploy Helm charts and manifests specfied as "deployments"
+            create_deployments --all
+
+            #* start dev mode "server"
+            start_dev server
+
+#* this is a list of `images` that DevSpace can build for this project
+images:
+    server:
+        image: archismanmridha/demo-server
+        dockerfile: ./demo-server.dockerfile
+        context: .
+        target: builder
+        kaniko:
+            cache: true
+
+#* this is a list of `deployments` that DevSpace can create for this project
+deployments:
+    server:
+        kubectl:
+            manifests:
+                - ../../kubernetes/applications/demo-server
+
+#* This is a list of `dev` containers that are based on the containers created by your deployments
+dev:
+    server:
+        #* search for the container that runs this image
+        imageSelector: archismanmridha/demo-server
+        #* replace with optimized container image
+        devImage: ghcr.io/loft-sh/devspace-containers/go:1.19-alpine
+
+        #* sync files between the local filesystem and the development container
+        sync:
+            - path: ./
+
+        #* open a terminal and use the following command to start it
+        terminal:
+            command: ./devspace_start.sh
+
+        #* forward the following ports to be able access your application via localhost
+        ports:
+            - port: "4000"
+
+        #* open the following URLs once they return an HTTP status code other than 502 or 503
+        open:
+            - url: http://localhost:4000

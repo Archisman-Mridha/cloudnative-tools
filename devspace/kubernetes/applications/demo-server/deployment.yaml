@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+    name: demo-server-deployment
+    labels:
+        app: demo-server
+
+spec:
+    selector:
+        matchLabels:
+            app: demo-server
+    template:
+        metadata:
+            labels:
+                app: demo-server
+        spec:
+            containers:
+                - name: demo-server-container
+                  image: archismanmridha/demo-server
+                  resources:
+                    limits:
+                        cpu: 200m
+                        memory: 256Mi
+                  ports:
+                    - containerPort: 4000

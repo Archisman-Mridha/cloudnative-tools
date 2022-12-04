@@ -1,0 +1,3 @@
+devspace.yaml
+.dockerignore
+server.dockerfile
