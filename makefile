@@ -13,3 +13,5 @@ delete-cluster:
 deploy-kubernetes-dashboard:
 	cd ./kubernetes-dashboard/terraform && terraform init && \
 		terraform apply
+
+	kubectl proxy
