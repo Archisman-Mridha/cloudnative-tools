@@ -18,19 +18,3 @@ resource "helm_release" "argocd" {
 }
 
 // TODO: use traefik ingress for complete automation
-
-resource "null_resource" "argocd_server_password_output_as_file" {
-    depends_on = [ helm_release.argocd ]
-
-    provisioner "local-exec" {
-        command = <<EOF
-
-            #! disbale port-forwarding once you are done
-            kubectl port-forward svc/argocd-server -n argocd 8080:443 &
-
-            kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d \
-               >> argocd-server-password.txt
-
-        EOF
-    }
-}

@@ -14,7 +14,7 @@ provider "argocd" {
     insecure = true
 
     username = "admin"
-    password = file("../installation/argocd-server-password.txt")
+    password = file("../../installations/argocd-server-password.txt")
 
     kubernetes {
 
