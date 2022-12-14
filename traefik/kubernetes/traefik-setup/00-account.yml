@@ -1,0 +1,6 @@
+#* this account will be used by traefik to monitor our services
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+    name: traefik-account
