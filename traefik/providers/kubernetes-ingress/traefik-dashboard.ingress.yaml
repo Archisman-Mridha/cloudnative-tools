@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+    name: traefik-dashboard
+    namespace: kube-system
+    annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web
+
+spec:
+    rules:
+        - host: dashboard.traefik.127.0.0.1.nip.io
+          http:
+              paths:
+                  - backend:
+                        service:
+                            name: traefik-dashboard
+                            port:
+                                number: 9000
+                    path: /
+                    pathType: Prefix

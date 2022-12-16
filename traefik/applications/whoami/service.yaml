@@ -3,6 +3,7 @@ kind: Service
 
 metadata:
     name: whoami-service
+    namespace: default
 
 spec:
     ports:
