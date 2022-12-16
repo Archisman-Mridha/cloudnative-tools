@@ -5,3 +5,12 @@ name: cloudnative-tools-testing
 
 servers: 1
 agents: 2
+
+options:
+    k3d:
+        disableLoadbalancer: true
+    k3s:
+        extraArgs:
+            - arg: --no-deploy=traefik
+              nodeFilters:
+                - server:*

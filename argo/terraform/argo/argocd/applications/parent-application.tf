@@ -15,7 +15,7 @@ resource "argocd_application" "parent" {
         source {
 
             repo_url = "https://github.com/Archisman-Mridha/cloudnative-tools"
-            path = "argo/kubernetes/argo/cd"
+            path = "argo/kubernetes/argo/cd/applications"
             target_revision = "main" 
         }
 
