@@ -11,3 +11,9 @@
 
 - [ ] **`VCluster`** - For creating virtual clusters inside real Kubernetes clusters \
 	Learned how to create preview environments
+
+- [ ] **`Traefik`** - For exposing applications outside the Kubernetes cluster
+
+- [ ] **`Kubernetes Gateway API`** - Better replacement of NGINX and Ingress
+
+- [ ] **`Cert Manager`** - Automated TLS certificate management in Kubernetes

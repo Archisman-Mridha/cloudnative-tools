@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+    name: whoami-deployment
+    labels:
+        app: whoami
+
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: whoami
+    template:
+        metadata:
+            labels:
+                app: whoami
+        spec:
+            containers:
+                - image: docker.io/traefik/whoami:v1.6.1
+                  name: whoami
+                  ports:
+                    - containerPort: 80
+                  resources:
+                    limits:
+                        memory: 256Mi
+                        cpu: 200m
