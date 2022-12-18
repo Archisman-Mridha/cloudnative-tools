@@ -14,6 +14,6 @@
 
 - [x] **`Traefik`** - For exposing applications outside the Kubernetes cluster
 
-- [ ] **`Kubernetes Gateway API`** - Better replacement of NGINX and Ingress
+- [x] **`Kubernetes Gateway API`** - Better replacement of NGINX and Ingress
 
 - [ ] **`Cert Manager`** - Automated TLS certificate management in Kubernetes
