@@ -8,6 +8,8 @@ resource "helm_release" "kubernetes_dashboard" {
     repository = "https://kubernetes.github.io/dashboard"
     chart = "kubernetes-dashboard"
     version = "6.0.0"
+
+    values = ["dashboard.sessionTimeout: 14400"]
 }
 
 #* creating an admin service-account for monitoring everything
