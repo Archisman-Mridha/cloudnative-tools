@@ -1,3 +1,4 @@
+//* installing argoCD using helm
 resource "helm_release" "argocd" {
     name = "argocd"
 
@@ -16,5 +17,3 @@ resource "helm_release" "argocd" {
         EOF
     }
 }
-
-// TODO: use traefik ingress for complete automation

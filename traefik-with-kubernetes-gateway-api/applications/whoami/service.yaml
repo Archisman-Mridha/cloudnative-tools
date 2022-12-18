@@ -6,9 +6,9 @@ metadata:
     namespace: default
 
 spec:
+    selector:
+        app: whoami
     ports:
         - name: whoami
           port: 80
-          targetPort: 80
-    selector:
-        app: whoami
+          targetPort: http

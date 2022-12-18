@@ -21,6 +21,7 @@ spec:
                   name: whoami
                   ports:
                     - containerPort: 80
+                      name: http
                   resources:
                     limits:
                         memory: 256Mi

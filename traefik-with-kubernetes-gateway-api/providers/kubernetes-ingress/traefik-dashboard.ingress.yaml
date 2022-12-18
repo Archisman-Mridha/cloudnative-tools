@@ -3,7 +3,7 @@ kind: Ingress
 
 metadata:
     name: traefik-dashboard
-    namespace: kube-system
+    namespace: traefik
     annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web
 
@@ -12,10 +12,10 @@ spec:
         - host: dashboard.traefik.127.0.0.1.nip.io
           http:
               paths:
-                  - backend:
+                  - path: /
+                    pathType: Prefix
+                    backend:
                         service:
                             name: traefik-dashboard
                             port:
                                 number: 9000
-                    path: /
-                    pathType: Prefix
