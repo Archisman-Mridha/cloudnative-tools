@@ -17,10 +17,7 @@
 
 - [ ] ***`CockroachDB with Atlas`*** - Distributed SQL database (CockroachDB) with a database migration tool (Atlas)
 
-- [ ] ***`Argo Ecosystem`*** - For creating fully automated Kubernetes native CI/CD pipelines based on GitOps principles \
-	Created an end to end CI/CD pipeline to deploy a demo server
-
-- [ ] ***`VCluster`*** - For creating virtual clusters inside real Kubernetes clusters \
-	Learned how to create preview environments
+- [ ] ***`Argo Ecosystem with Harbor`*** - For creating fully automated Kubernetes native CI/CD pipelines based on GitOps principles \
+	Created an end to end CI/CD pipeline to deploy a server
 
 - [ ] ***`Cert Manager`*** - Automated TLS certificate management in Kubernetes
