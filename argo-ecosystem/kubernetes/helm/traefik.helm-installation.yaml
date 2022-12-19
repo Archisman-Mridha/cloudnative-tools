@@ -26,10 +26,11 @@ spec:
         repoURL: https://helm.traefik.io/traefik
         chart: traefik
         targetRevision: 20.8.0
-        values: |
-            experimental:
-                kubernetesGateway:
-                    enabled: true
+        helm:
+            values: |
+                experimental:
+                    kubernetesGateway:
+                        enabled: true
 
     syncPolicy:
         automated:
