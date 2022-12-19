@@ -4,6 +4,8 @@ kind: Service
 metadata:
     name: whoami-service
     namespace: default
+    labels:
+        app: whoami
 
 spec:
     selector:

@@ -3,6 +3,7 @@ kind: Deployment
 
 metadata:
     name: whoami-deployment
+    namespace: default
     labels:
         app: whoami
 
