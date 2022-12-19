@@ -27,6 +27,11 @@ spec:
         chart: traefik
         targetRevision: 20.8.0
 
+    values: |
+        experimental:
+            kubernetesGateway:
+                enabled: true
+
     syncPolicy:
         automated:
             prune: true
