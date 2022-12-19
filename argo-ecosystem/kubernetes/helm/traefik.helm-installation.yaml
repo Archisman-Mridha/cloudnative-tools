@@ -1,0 +1,33 @@
+#* the namespace where helm installation will take place
+
+apiVersion: v1
+kind: Namespace
+
+metadata:
+    name: traefik
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+    name: traefik-helm-installation
+    namespace: argocd
+
+spec:
+    project: default
+
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: traefik
+
+    source:
+        repoURL: https://helm.traefik.io/traefik
+        chart: traefik
+        targetRevision: 20.8.0
+
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true

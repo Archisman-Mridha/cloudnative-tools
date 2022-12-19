@@ -2,20 +2,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-    name: argocd-application-manager
+    name: kubernetes-gateway-api-crds
     namespace: argocd
 
 spec:
     project: default
 
     source:
-        repoURL: https://github.com/Archisman-Mridha/cloudnative-tools
-        targetRevision: HEAD
-        path: argo-ecosystem/kubernetes/argo/cd/applications
+        repoURL: https://github.com/kubernetes-sigs/gateway-api
+        targetRevision: release-0.4
+        path: config/crd
 
     destination:
         server: https://kubernetes.default.svc
-        namespace: argocd
+        namespace: default
 
     syncPolicy:
         automated:
