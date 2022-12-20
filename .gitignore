@@ -8,3 +8,5 @@ terraform.tfstate.backup
 .devspace
 
 .vscode
+
+*.credentials.env

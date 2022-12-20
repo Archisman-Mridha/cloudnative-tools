@@ -15,7 +15,8 @@
 - [x] ***`Bitnami Sealed Secrets`*** - Storing Kubernetes Secrets encrypted in Github to leverage GitOPs advantages \
 	Generated Sealed Secret manifest file from existing Kubernetes Secret manifest file
 
-- [ ] ***`CockroachDB with Atlas`*** - Distributed SQL database (CockroachDB) with a database migration tool (Atlas)
+- [x] ***`CockroachDB with goLang Migrate`*** - Distributed SQL database (CockroachDB) with a database migration tool (goLang Migrate) \
+	Ran migrations for a cockroachDB cluster running in the cloud
 
 - [ ] ***`Argo Ecosystem with Harbor`*** - For creating fully automated Kubernetes native CI/CD pipelines based on GitOps principles \
 	Created an end to end CI/CD pipeline to deploy a server
