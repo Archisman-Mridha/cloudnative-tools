@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+    name: argo-workflows-kustomize-installation-application
+    namespace: argocd
+
+spec:
+    project: default
+
+    source:
+        repoURL: https://github.com/Archisman-Mridha/cloudnative-tools
+        targetRevision: HEAD
+        path: argo-ecosystem/kubernetes/installations/kustomize/argo-workflows
+
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+
+    syncPolicy:
+        automated:
+            prune: true
+            allowEmpty: true
+            selfHeal: true
