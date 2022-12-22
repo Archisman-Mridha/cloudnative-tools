@@ -12,6 +12,9 @@ spec:
         repoURL: https://github.com/Archisman-Mridha/cloudnative-tools
         targetRevision: HEAD
         path: argo-ecosystem/kubernetes/installations
+        directory:
+            recurse: true
+            exclude: "{*.patch.yaml}"
 
     destination:
         server: https://kubernetes.default.svc
