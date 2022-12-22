@@ -11,7 +11,7 @@ spec:
     source:
         repoURL: https://github.com/Archisman-Mridha/cloudnative-tools
         targetRevision: HEAD
-        path: argo-ecosystem/kubernetes/helm
+        path: argo-ecosystem/kubernetes/installations/helm
         directory:
             recurse: true
 

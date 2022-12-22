@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-    name: installations
+    name: crds
     namespace: argocd
 
 spec:
@@ -11,10 +11,9 @@ spec:
     source:
         repoURL: https://github.com/Archisman-Mridha/cloudnative-tools
         targetRevision: HEAD
-        path: argo-ecosystem/kubernetes/installations
+        path: argo-ecosystem/kubernetes/installations/crds
         directory:
             recurse: true
-            exclude: "{*.patch.yaml}"
 
     destination:
         server: https://kubernetes.default.svc
