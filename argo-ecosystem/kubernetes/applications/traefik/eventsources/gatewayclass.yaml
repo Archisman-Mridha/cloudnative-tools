@@ -1,0 +1,9 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: GatewayClass
+
+metadata:
+    name: argo-eventsources-gatewayclass
+    namespace: traefik
+
+spec:
+    controllerName: traefik.io/gateway-controller
