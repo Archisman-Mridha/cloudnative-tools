@@ -10,3 +10,6 @@ terraform.tfstate.backup
 .vscode
 
 *.credentials.env
+
+# Kubernetes secrets
+dockerhub-credentials.secret.yaml
