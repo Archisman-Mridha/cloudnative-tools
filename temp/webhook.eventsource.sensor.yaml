@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+
+metadata:
+    name: webhook-eventsource-sensor
+    namespace: argo-events
+
+spec:
+
+    template:
+        serviceAccountName: operate-workflow-sa
+
+    dependencies:
+        - name: webhook-eventsource-test-event
+          eventSourceName: webhook-eventsource
+          eventName: test
+
+    triggers:
+        - template:
+            name: test-workflow-trigger
+            argoWorkflow:
+                operation: submit
+                source:
+                    resource:
+
+                        #* defining the argo workflow
+                        apiVersion: argoproj.io/v1alpha1
+                        kind: Workflow
+
+                        metadata:
+                            generateName: test-workflow-
+                            namespace: argo
+
+                        spec:
+                            workflowTemplateRef:
+                                name: test-workflow-template
