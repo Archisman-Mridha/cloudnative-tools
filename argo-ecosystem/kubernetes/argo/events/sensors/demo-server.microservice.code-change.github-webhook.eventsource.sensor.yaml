@@ -11,13 +11,13 @@ spec:
         serviceAccountName: operate-workflow-sa
 
     dependencies:
-        - name: webhook-eventsource-test-event
-          eventSourceName: webhook-eventsource
-          eventName: test
+        - name: demo-server-code-change-event
+          eventSourceName: microservices-code-change-github-webhook-eventsource
+          eventName: demo-server-code-change
 
     triggers:
         - template:
-            name: test-workflow-trigger
+            name: demo-server-container-image-deployment-workflow-trigger
             argoWorkflow:
                 operation: submit
                 source:
@@ -28,9 +28,9 @@ spec:
                         kind: Workflow
 
                         metadata:
-                            generateName: test-workflow-
+                            generateName: demo-server-container-image-deployment-workflow-
                             namespace: argo
 
                         spec:
                             workflowTemplateRef:
-                                name: test-workflow-template
+                                name: demo-server-container-image-deployment-workflow-template

@@ -1,0 +1,83 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+
+metadata:
+    name: demo-server-container-image-deployment-workflow-template
+    namespace: argo
+
+spec:
+    entrypoint: main
+
+    #* workspace to store assets that can be shared among multiple templates
+    volumeClaimTemplates:
+        - metadata:
+            name: demo-server-container-image-deployment-workflow-template-workspace
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+                requests:
+                    storage: 75Mi
+
+    templates:
+        - name: main
+          dag:
+            tasks:
+                - name: git clone
+                  template: git-clone-template
+                - name: dependencies installation
+                  template: dependencies-installation-template
+                - name: container image build and push
+                  template: container-image-build-and-push-template
+
+        - name: git-clone-template
+          container:
+            image: alpine/git:v2.26.2
+            workingDir: /repository
+            volumeMounts:
+                - name: demo-server-container-image-deployment-workflow-template-workspace
+                  mountPath: /repository/argo-ecosystem/demo-server
+            args:
+                - clone
+                - https://github.com/Archisman-Mridha/cloudnative-tools
+                - .
+
+        - name: dependencies-installation-template
+          container:
+            image: node:18-alpine
+            workingDir: /app
+            volumeMounts:
+                - name: demo-server-container-image-deployment-workflow-template-workspace
+                  mountPath: /app
+            command:
+                - npm
+            args:
+                - install
+
+        - name: container-image-build-and-push-template
+
+          #* loading the dockerhub credentials from a Kubernetes secret
+          volumes:
+            - name: docker-config
+              secret:
+                secretName: dockerhub-credentials-secret
+
+          container:
+            image: moby/buildkit:v0.9.3-rootless
+            workingDir: /app
+            volumeMounts:
+                - name: demo-server-container-image-deployment-workflow-template-workspace
+                  mountPath: /app
+                - name: docker-config
+                  mountPath: /.docker
+            command:
+                - buildctl-daemonless.sh
+            args:
+                - build
+                - --frontend
+                - dockerfile.v0
+                - --local
+                - context=.
+                - --local
+                - dockerfile=.
+                - --output
+                - type=image,name=archismanmridha/demo-server:1.0.0,push=true
