@@ -8,80 +8,64 @@ metadata:
 spec:
     entrypoint: main
 
-    #* workspace to store assets that can be shared among multiple templates
     volumeClaimTemplates:
         - metadata:
-            name: demo-server-workspace
+            name: workspace
           spec:
-            accessModes: ["ReadWriteOnce"]
+            accessModes: [ "ReadWriteOnce" ]
             resources:
                 requests:
-                    storage: 75Mi
+                    storage: 65Mi
 
     templates:
         - name: main
-          dag:
-            tasks:
-                - name: git-clone
-                  template: git-clone-template
-                - name: dependencies-installation
-                  template: dependencies-installation-template
-                - name: container-image-build-and-push
-                  template: container-image-build-and-push-template
+          steps:
+            - - name: git-clone
+                template: git-clone
+            - - name: build-and-push
+                template: build-and-push
 
-        - name: git-clone-template
+        - name: git-clone
           container:
-            image: alpine/git:v2.26.2
+            image: alpine/git:latest
             workingDir: /workspace
             volumeMounts:
-                - name: demo-server-workspace
-                  mountPath: /workspace
+                - mountPath: /workspace
+                  name: workspace
             command:
                 - git
             args:
                 - clone
                 - https://github.com/Archisman-Mridha/cloudnative-tools
-                - cloudnative-tools
+                - .
 
-        - name: dependencies-installation-template
-          container:
-            image: node:18-alpine
-            workingDir: /workspace
-            volumeMounts:
-                - name: demo-server-workspace
-                  mountPath: /workspace
-            command:
-                - npm
-            args:
-                - install
-                - --prefix
-                - /workspace/cloudnative-tools/argo-ecosystem/demo-server/
-
-        - name: container-image-build-and-push-template
-
-          #* loading the dockerhub credentials from a Kubernetes secret
+        - name: build-and-push
           volumes:
-            - name: docker-config
+            - name: dockerhub-credentials-secret
               secret:
                 secretName: dockerhub-credentials-secret
-
           container:
-            image: moby/buildkit:rootless
-            workingDir: /workspace
+            image: moby/buildkit:v0.9.3-rootless
             volumeMounts:
-                - name: demo-server-workspace
-                  mountPath: /workspace
-                - name: docker-config
-                  mountPath: /.docker
+                - mountPath: /workspace
+                  name: workspace
+                - mountPath: /.docker
+                  name: dockerhub-credentials-secret
+            workingDir: /workspace/argo-ecosystem/demo-server
+            env:
+                - name: BUILDKITD_FLAGS
+                  value: --oci-worker-no-process-sandbox
+                - name: DOCKER_CONFIG
+                  value: /.docker
             command:
-                - buildctl
+                - buildctl-daemonless.sh
             args:
                 - build
                 - --frontend
                 - dockerfile.v0
                 - --local
-                - context=/workspace/cloudnative-tools/argo-ecosystem/demo-server
+                - context=.
                 - --local
-                - dockerfile=/workspace/cloudnative-tools/argo-ecosystem/demo-server/.
+                - dockerfile=.
                 - --output
-                - type=image,name=docker.io/archismanmridha/demo-server:1.0.0,push=true
+                - type=image,name=docker.io/archismanmridha/demo-server:latest,push=true
