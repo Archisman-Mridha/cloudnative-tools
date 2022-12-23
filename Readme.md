@@ -22,3 +22,7 @@
 	Created an end to end CI/CD pipeline to deploy a server
 
 - [ ] ***`Cert Manager`*** - Automated TLS certificate management in Kubernetes
+
+- [ ] ***`Cilium`*** - Kubernetes networking based on eBPF technology
+
+- [ ] ***`Istio`*** - Service mesh for Kubernetes
