@@ -13,9 +13,19 @@ spec:
             - port: 12000
               targetPort: 12000
 
-    #* events
-    webhook:
+    github:
         demo-server-code-change:
-            port: "12000"
-            endpoint: /demo-server-code-change
-            method: GET
+            repositories:
+                - owner: Archisman-Mridha
+                  names:
+                    - cloudnative-tools
+            webhook:
+                endpoint: /demo-server-code-change
+                port: "12000"
+                method: POST
+                url: http://demo-server-code-change.github-webhook.argo-eventsource.traefik.127.0.0.1.nip.io
+            events:
+                - push
+            insecure: true
+            active: true
+            contentType: json
