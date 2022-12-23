@@ -21,6 +21,6 @@ spec:
                     value: /
 
           backendRefs:
-              - name: microservices-code-change-github-webhook-eventsource-eventsource-svc
+              - name: code-change-github-webhook-eventsource-eventsource-svc
                 port: 12000
                 weight: 1

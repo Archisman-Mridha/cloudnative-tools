@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 
 metadata:
-    name: microservices-code-change-github-webhook-eventsource
+    name: code-change-github-webhook-eventsource
     namespace: argo-events
 
 spec:
@@ -15,7 +15,7 @@ spec:
 
     #* events
     webhook:
-        test:
+        demo-server-code-change:
             port: "12000"
             endpoint: /demo-server-code-change
             method: GET
