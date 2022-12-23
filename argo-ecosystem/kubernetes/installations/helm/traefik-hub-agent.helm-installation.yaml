@@ -18,7 +18,7 @@ spec:
         targetRevision: 1.2.1
         helm:
             values: |
-                token: 99c63b3d-2995-456e-acca-89c3a00b5141
+                token: e22a62b2-6e3f-4076-beb5-e2d5d7dc1620
 
     syncPolicy:
         automated:
