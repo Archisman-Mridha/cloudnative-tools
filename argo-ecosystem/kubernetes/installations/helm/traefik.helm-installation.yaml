@@ -19,12 +19,29 @@ spec:
         helm:
             releaseName: traefik
             values: |
-                hub:
-                    enabled: true
+                additionalArguments:
+                    - --experimental.hub
+                    - --hub
 
                 providers:
                     kubernetesIngress:
                         allowExternalNameServices: true
+
+                metrics:
+                    prometheus:
+                        addRoutersLabels: true
+
+                ports:
+                    metrics:
+                        expose: true
+                    traefikhub-tunl:
+                        protocol: TCP
+                        port: 9901
+                        expose: true
+                        exposedPort: 9901
+
+                service:
+                    type: ClusterIP
 
     syncPolicy:
         automated:

@@ -3,7 +3,7 @@ kind: Service
 
 metadata:
     name: code-change-github-webhook-eventsource-service
-    namespace: argo-events
+    namespace: argo
 
 spec:
     ports:

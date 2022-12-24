@@ -29,7 +29,7 @@ spec:
         helm:
             releaseName: hub-agent
             values: |
-                token: 4d09d574-229e-4982-83c1-517d1e18652d
+                token: b0c02e73-f4d2-4e5b-abaf-07fa0e4adf6d
 
     syncPolicy:
         automated:

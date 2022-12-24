@@ -1,36 +1,36 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Sensor
+# apiVersion: argoproj.io/v1alpha1
+# kind: Sensor
 
-metadata:
-    name: demo-server-code-change-github-webhook-eventsource-sensor
-    namespace: argo-events
+# metadata:
+#     name: demo-server-code-change-github-webhook-eventsource-sensor
+#     namespace: argo-events
 
-spec:
+# spec:
 
-    template:
-        serviceAccountName: operate-workflow-sa
+#     template:
+#         serviceAccountName: operate-workflow-sa
 
-    dependencies:
-        - name: demo-server-code-change-event
-          eventSourceName: code-change-github-webhook-eventsource
-          eventName: demo-server-code-change
+#     dependencies:
+#         - name: demo-server-code-change-event
+#           eventSourceName: code-change-github-webhook-eventsource
+#           eventName: demo-server-code-change
 
-    triggers:
-        - template:
-            name: demo-server-container-image-deployment-workflow-trigger
-            argoWorkflow:
-                operation: submit
-                source:
-                    resource:
+#     triggers:
+#         - template:
+#             name: demo-server-container-image-deployment-workflow-trigger
+#             argoWorkflow:
+#                 operation: submit
+#                 source:
+#                     resource:
 
-                        #* defining the argo workflow
-                        apiVersion: argoproj.io/v1alpha1
-                        kind: Workflow
+#                         #* defining the argo workflow
+#                         apiVersion: argoproj.io/v1alpha1
+#                         kind: Workflow
 
-                        metadata:
-                            generateName: demo-server-container-image-deployment-workflow-
-                            namespace: argo
+#                         metadata:
+#                             generateName: demo-server-container-image-deployment-workflow-
+#                             namespace: argo
 
-                        spec:
-                            workflowTemplateRef:
-                                name: demo-server-container-image-deployment-workflow-template
+#                         spec:
+#                             workflowTemplateRef:
+#                                 name: demo-server-container-image-deployment-workflow-template
