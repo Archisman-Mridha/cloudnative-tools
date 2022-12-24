@@ -7,12 +7,6 @@ metadata:
 
 spec:
 
-    #* the Kubernetes service created by argo-events automatically
-    service:
-        ports:
-            - port: 12000
-              targetPort: 12000
-
     github:
         demo-server-code-change:
             repositories:

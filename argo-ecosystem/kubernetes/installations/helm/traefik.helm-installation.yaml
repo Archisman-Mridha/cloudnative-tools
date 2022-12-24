@@ -27,6 +27,10 @@ spec:
                 hub:
                     enabled: true
 
+                providers:
+                    kubernetesIngress:
+                        allowExternalNameServices: true
+
     syncPolicy:
         automated:
             prune: true
