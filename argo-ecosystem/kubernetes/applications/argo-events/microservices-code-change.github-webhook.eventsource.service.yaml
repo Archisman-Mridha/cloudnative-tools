@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+    name: code-change-github-webhook-eventsource-service
+    namespace: argo-events
+
+spec:
+    ports:
+        - port: 12000
+          protocol: TCP
+          targetPort: 12000
+    selector:
+        eventsource-name: code-change-github-webhook-eventsource
+    type: NodePort
