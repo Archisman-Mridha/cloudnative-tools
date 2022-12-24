@@ -1,17 +1,17 @@
-apiVersion: v1
-kind: Service
+# apiVersion: v1
+# kind: Service
 
-metadata:
-    name: traefik-dashboard
-    namespace: traefik
+# metadata:
+#     name: traefik-dashboard
+#     namespace: hub-agent
 
-spec:
-    ports:
-        - port: 9000
-          protocol: TCP
-          targetPort: 9000
-    selector:
-        app.kubernetes.io/instance: traefik-helm-installation-traefik
-        app.kubernetes.io/name: traefik
-    sessionAffinity: None
-    type: ClusterIP
+# spec:
+#     ports:
+#         - port: 9000
+#           protocol: TCP
+#           targetPort: 9000
+#     selector:
+#         app.kubernetes.io/instance: traefik-traefik
+#         app.kubernetes.io/name: traefik
+#     sessionAffinity: None
+#     type: ClusterIP

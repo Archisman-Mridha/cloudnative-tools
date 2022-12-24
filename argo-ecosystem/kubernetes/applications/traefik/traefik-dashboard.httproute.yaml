@@ -1,26 +1,26 @@
-apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: HTTPRoute
-metadata:
-    name: traefik-dashboard-httproute
-    namespace: traefik
+# apiVersion: gateway.networking.k8s.io/v1alpha2
+# kind: HTTPRoute
+# metadata:
+#     name: traefik-dashboard-httproute
+#     namespace: hub-agent
 
-spec:
-    parentRefs:
-        - name: traefik-gateway
-          sectionName: web
-          namespace: traefik
+# spec:
+#     parentRefs:
+#         - name: traefik-gateway
+#           sectionName: web
+#           namespace: hub-agent
 
-    hostnames:
-        - dashboard.traefik.127.0.0.1.nip.io
+#     hostnames:
+#         - dashboard.traefik.127.0.0.1.nip.io
 
-    rules:
-        - matches:
-              - path:
-                    type: PathPrefix
-                    value: /
+#     rules:
+#         - matches:
+#               - path:
+#                     type: PathPrefix
+#                     value: /
 
-          backendRefs:
-              - name: traefik-dashboard
-                port: 9000
-                namespace: traefik
-                weight: 1
+#           backendRefs:
+#               - name: traefik-dashboard
+#                 port: 9000
+#                 namespace: hub-agent
+#                 weight: 1

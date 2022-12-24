@@ -1,3 +1,13 @@
+#* the namespace where helm installation will take place
+
+apiVersion: v1
+kind: Namespace
+
+metadata:
+    name: hub-agent
+
+---
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 
@@ -10,13 +20,14 @@ spec:
 
     destination:
         server: https://kubernetes.default.svc
-        namespace: traefik
+        namespace: hub-agent
 
     source:
         repoURL: https://helm.traefik.io/traefik
         chart: hub-agent
         targetRevision: 1.2.1
         helm:
+            releaseName: hub-agent
             values: |
                 token: e22a62b2-6e3f-4076-beb5-e2d5d7dc1620
 
