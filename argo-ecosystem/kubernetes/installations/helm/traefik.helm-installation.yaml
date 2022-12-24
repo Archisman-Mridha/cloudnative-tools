@@ -19,11 +19,6 @@ spec:
         helm:
             releaseName: traefik
             values: |
-                experimental:
-                    kubernetesGateway:
-                        enabled: true
-
-                #* using traefik hub to expose Kubernetes services to public internet
                 hub:
                     enabled: true
 
