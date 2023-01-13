@@ -27,6 +27,8 @@
 
 - [ ] ***`kubernetes-e2e framework`*** - For performing end to end tests with Kubernetes
 
+- [ ] ***`SchemaHero`*** - For running database migrations inside Kubernetes
+
 - [ ] ***`Cert Manager`*** - Automated TLS certificate management in Kubernetes
 
 - [ ] ***`Cilium`*** - Kubernetes networking based on eBPF technology
