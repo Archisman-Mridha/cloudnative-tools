@@ -1,0 +1,13 @@
+syntax= "proto3";
+
+package receiver;
+option go_package="receiver/proto";
+
+service Receiver {
+
+    rpc ReceiveMessage(ReceiveMessageRequest) returns(ReceiveMessageResponse) { }
+}
+
+message ReceiveMessageRequest { }
+
+message ReceiveMessageResponse { }

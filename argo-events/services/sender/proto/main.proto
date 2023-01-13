@@ -1,0 +1,13 @@
+syntax= "proto3";
+
+package sender;
+option go_package="sender/proto";
+
+service Sender {
+
+    rpc SendMessage(SendMessageRequest) returns(SendMessageResponse) { }
+}
+
+message SendMessageRequest { }
+
+message SendMessageResponse { }
