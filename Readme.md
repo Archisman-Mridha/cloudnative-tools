@@ -21,6 +21,12 @@
 - [x] ***`Argo Ecosystem`*** - For creating fully automated Kubernetes native CI/CD pipelines based on GitOps principles \
 	Created an end to end CI/CD pipeline to deploy a server
 
+	You can find the code in this repository - https://github.com/Archisman-Mridha/kubernetes-cicd-with-argo
+
+- [ ] ***`Argo Events`*** - For inter-service communication using rabbitMQ
+
+- [ ] ***`kubernetes-e2e framework`*** - For performing end to end tests with Kubernetes
+
 - [ ] ***`Cert Manager`*** - Automated TLS certificate management in Kubernetes
 
 - [ ] ***`Cilium`*** - Kubernetes networking based on eBPF technology
