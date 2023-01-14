@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+    name: sender-microservice-deployment
+    namespace: microservices
+    labels:
+        app: sender
+
+spec:
+    selector:
+        matchLabels:
+            app: sender
+
+    template:
+        metadata:
+            name: sender-microservice
+            labels:
+                app: sender
+        spec:
+            containers:
+                - name: sender-microservice
+                  image: archismanmridha/argo-events-sender-microservice:1.0.0
+                  imagePullPolicy: IfNotPresent
+                  resources:
+                    limits:
+                        cpu: 200m
+                        memory: 256Mi

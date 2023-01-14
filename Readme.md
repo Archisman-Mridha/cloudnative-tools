@@ -23,7 +23,7 @@
 
 	You can find the code in this repository - https://github.com/Archisman-Mridha/kubernetes-cicd-with-argo
 
-- [ ] ***`Argo Events`*** - For inter-service communication using rabbitMQ
+- [ ] ***`RabbitMQ`*** - For inter-service communication using Advanced Message Queue Protocol (AMQP)
 
 - [ ] ***`kubernetes-e2e framework`*** - For performing end to end tests with Kubernetes
 

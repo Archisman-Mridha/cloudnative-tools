@@ -25,6 +25,9 @@ RUN go build ./services/sender/
 
 FROM alpine:latest AS packager
 WORKDIR /
+
 COPY --from=builder /workspace/sender .
+RUN chmod +x /sender
+
 EXPOSE 4000
-ENTRYPOINT [ "sender" ]
+ENTRYPOINT [ "/sender" ]

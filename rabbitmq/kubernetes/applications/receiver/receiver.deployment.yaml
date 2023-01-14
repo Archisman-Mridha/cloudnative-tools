@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+    name: receiver-microservice-deployment
+    namespace: microservices
+    labels:
+        app: receiver
+
+spec:
+    selector:
+        matchLabels:
+            app: receiver
+
+    template:
+        metadata:
+            name: receiver-microservice
+            labels:
+                app: receiver
+        spec:
+            containers:
+                - name: receiver-microservice
+                  image: archismanmridha/argo-events-receiver-microservice:1.0.0
+                  imagePullPolicy: IfNotPresent
+                  resources:
+                    limits:
+                        cpu: 200m
+                        memory: 256Mi

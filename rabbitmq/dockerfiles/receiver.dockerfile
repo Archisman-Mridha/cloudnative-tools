@@ -25,6 +25,9 @@ RUN go build ./services/receiver/
 
 FROM alpine:latest AS packager
 WORKDIR /
+
 COPY --from=builder /workspace/receiver .
+RUN chmod +x /receiver
+
 EXPOSE 4000
-ENTRYPOINT [ "receiver" ]
+ENTRYPOINT [ "/receiver" ]
