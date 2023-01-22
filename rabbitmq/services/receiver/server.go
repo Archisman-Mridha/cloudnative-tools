@@ -2,8 +2,10 @@ package main
 
 import (
 	"log"
+	protoGenerated "sender/proto/generated"
 
 	"github.com/streadway/amqp"
+	"google.golang.org/protobuf/proto"
 )
 
 var (
@@ -29,11 +31,17 @@ func main( ) {
 
 	//* consuming messages from the queue `Main`
 	newTestMessages, error := RabbitMQChannel.Consume(
-		"Main", "", false, false, false, false, nil)
+		"Main", "", true, false, false, false, nil)
 	if error != nil {
 		log.Fatal(error.Error( )) }
 
 	for testMessage := range newTestMessages {
-		log.Println("received new message from rabbitMQ queue `Main` - ", string(testMessage.Body))
+		var unmarshalledMessage protoGenerated.TestMessage
+
+		error := proto.Unmarshal(testMessage.Body, &unmarshalledMessage)
+		if error != nil {
+			log.Println("error unmarshalling message from rabbitMQ - ", error.Error( )) }
+
+		log.Println("received new message from rabbitMQ queue `Main` - ", unmarshalledMessage.Message)
 	}
 }

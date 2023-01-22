@@ -5,30 +5,43 @@ import (
 	"log"
 	"shared/utils"
 
+	proto "github.com/golang/protobuf/proto"
 	"github.com/streadway/amqp"
 	"google.golang.org/grpc"
 
-	proto "sender/proto/generated"
+	protoGenerated "sender/proto/generated"
 )
 
 type SenderServer struct {
-	proto.UnimplementedSenderServer
+	protoGenerated.UnimplementedSenderServer
 }
 
 func(SenderServer) SendMessage(
-	ctx context.Context, request *proto.SendMessageRequest) (*proto.SendMessageResponse, error) {
+	ctx context.Context, request *protoGenerated.SendMessageRequest) (*protoGenerated.SendMessageResponse, error) {
+
+	message, error := proto.Marshal(
+		&protoGenerated.TestMessage{
+			Message: "hi",
+		},
+	)
+
+	if error != nil {
+		log.Println("error marshalling message - ", error.Error( ))
+
+		responseError := "error sending message to rabbitMQ"
+		return &protoGenerated.SendMessageResponse{ Error: &responseError }, nil
+	}
 
 	RabbitMQChannel.Publish("",
 		*MessageQueueName,
 		false, false,
 		amqp.Publishing{
 
-			ContentType: "text/plain",
-			Body: []byte("test message"),
+			Body: message,
 		},
 	)
 
-	return &proto.SendMessageResponse{ }, nil
+	return &protoGenerated.SendMessageResponse{ }, nil
 }
 
 var (
@@ -66,7 +79,7 @@ func main( ) {
 	//* creating the gRPC server
 	gRPCServer := utils.CreateGRPCServer(
 		func(gRPCServer *grpc.Server) {
-			proto.RegisterSenderServer(gRPCServer, &SenderServer{ })
+			protoGenerated.RegisterSenderServer(gRPCServer, &SenderServer{ })
 		},
 	)
 

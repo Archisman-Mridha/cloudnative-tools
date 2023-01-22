@@ -10,4 +10,6 @@ service Sender {
 
 message SendMessageRequest { }
 
-message SendMessageResponse { }
+message SendMessageResponse {
+    optional string error= 1;
+}
