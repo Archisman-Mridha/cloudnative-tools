@@ -20,7 +20,7 @@ spec:
         spec:
             containers:
                 - name: receiver-microservice
-                  image: archismanmridha/argo-events-receiver-microservice:1.0.0
+                  image: archismanmridha/rabbitmq-receiver-microservice:1.0.0
                   imagePullPolicy: IfNotPresent
                   resources:
                     limits:
