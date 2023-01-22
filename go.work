@@ -1,0 +1,7 @@
+go 1.19
+
+use (
+	./rabbitmq/services/receiver
+	./rabbitmq/services/sender
+	./rabbitmq/shared
+)

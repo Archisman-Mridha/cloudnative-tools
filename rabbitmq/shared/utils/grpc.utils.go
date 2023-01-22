@@ -31,9 +31,7 @@ func CreateGRPCServer(setupGrpcServer func(*grpc.Server)) *grpc.Server {
 	setupGrpcServer(gRPCServer)
 
 	//* starting the grpc server
-
 	log.Println("🚀 starting gRPC server")
-
 	gRPCServer.Serve(portListener)
 
 	return gRPCServer

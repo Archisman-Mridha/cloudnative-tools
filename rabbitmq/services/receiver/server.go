@@ -1,33 +1,39 @@
 package main
 
 import (
-	"context"
-	"shared/utils"
+	"log"
 
-	"google.golang.org/grpc"
-
-	proto "receiver/proto/generated"
+	"github.com/streadway/amqp"
 )
 
-type ReceiverServer struct {
-	proto.UnimplementedReceiverServer
-}
-
-func(ReceiverServer) SendMessage(
-	ctx context.Context, request *proto.ReceiveMessageRequest) (*proto.ReceiveMessageResponse, error) {
-
-	// TODO: receive test message from the sender
-
-	return &proto.ReceiveMessageResponse{ }, nil
-}
+var (
+	MessageQueueName *string
+	RabbitMQChannel *amqp.Channel
+)
 
 func main( ) {
 
-	gRPCServer := utils.CreateGRPCServer(
-		func(gRPCServer *grpc.Server) {
-			proto.RegisterReceiverServer(gRPCServer, &ReceiverServer{ })
-		},
-	)
+	//* connecting to rabbitMQ
+	rabbitMQConnection, error := amqp.Dial("amqp://user:password@localhost:5672/")
+	if error != nil {
+		log.Fatal(error.Error( )) }
 
-	defer gRPCServer.Stop( )
+	defer rabbitMQConnection.Close( )
+
+	//* creating a rabbitMQ channel
+	RabbitMQChannel, error= rabbitMQConnection.Channel( )
+	if error != nil {
+		log.Fatal(error.Error( )) }
+
+	defer RabbitMQChannel.Close( )
+
+	//* consuming messages from the queue `Main`
+	newTestMessages, error := RabbitMQChannel.Consume(
+		"Main", "", false, false, false, false, nil)
+	if error != nil {
+		log.Fatal(error.Error( )) }
+
+	for testMessage := range newTestMessages {
+		log.Println("received new message from rabbitMQ queue `Main` - ", string(testMessage.Body))
+	}
 }
