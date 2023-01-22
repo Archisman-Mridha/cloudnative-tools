@@ -2,10 +2,11 @@ package main
 
 import (
 	"log"
-	protoGenerated "sender/proto/generated"
 
 	"github.com/streadway/amqp"
 	"google.golang.org/protobuf/proto"
+
+	protoGenerated "receiver/proto/generated"
 )
 
 var (
