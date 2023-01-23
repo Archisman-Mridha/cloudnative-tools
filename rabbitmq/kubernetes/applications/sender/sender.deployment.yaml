@@ -3,7 +3,7 @@ kind: Deployment
 
 metadata:
     name: sender-microservice-deployment
-    namespace: microservices
+    namespace: dev
     labels:
         app: sender
 

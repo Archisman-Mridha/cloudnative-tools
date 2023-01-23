@@ -52,7 +52,7 @@ var (
 func main( ) {
 
 	//* connecting to rabbitMQ
-	rabbitMQConnection, error := amqp.Dial("amqp://user:password@localhost:5672/")
+	rabbitMQConnection, error := amqp.Dial("amqp://user:password@10.43.79.24:5672/")
 	if error != nil {
 		log.Fatal("error connecting to rabbitMQ \n", error.Error( )) }
 

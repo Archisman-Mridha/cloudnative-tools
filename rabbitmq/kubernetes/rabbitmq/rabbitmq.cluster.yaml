@@ -8,21 +8,9 @@ metadata:
 spec:
     replicas: 3
 
-    resources:
-        requests:
-            memory: 500Mi
-            cpu: 250m
-        limits:
-            memory: 1Gi
-            cpu: 500m
-
     rabbitmq:
-
         additionalConfig: |
-            log.console.level = info
-            default_user = user
-            default_pass = password
-            default_user_tags.administrator = true
+            default_user=user
+            default_pass=password
 
-    service:
-        type: LoadBalancer
+            log.console.level=debug

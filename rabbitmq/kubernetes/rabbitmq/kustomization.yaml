@@ -2,11 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 metadata:
-    name: rabbitmq-kustomization
+    name: rabbitmq-installation-kustomization
     namespace: default
 
 resources:
-    #* install the rabbitMQ cluster operator
-    - https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
-
     - ./rabbitmq.cluster.yaml
+    - https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml

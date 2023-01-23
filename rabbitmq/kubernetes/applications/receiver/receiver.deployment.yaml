@@ -3,7 +3,7 @@ kind: Deployment
 
 metadata:
     name: receiver-microservice-deployment
-    namespace: microservices
+    namespace: dev
     labels:
         app: receiver
 
@@ -20,7 +20,7 @@ spec:
         spec:
             containers:
                 - name: receiver-microservice
-                  image: archismanmridha/rabbitmq-receiver-microservice:1.0.0
+                  image: archismanmridha/rabbitmq-receiver-microservice:2.0.0
                   imagePullPolicy: IfNotPresent
                   resources:
                     limits:

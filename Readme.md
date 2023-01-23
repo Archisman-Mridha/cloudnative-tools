@@ -23,7 +23,8 @@
 
 	You can find the code in this repository - https://github.com/Archisman-Mridha/kubernetes-cicd-with-argo
 
-- [ ] ***`RabbitMQ`*** - For inter-service communication using Advanced Message Queue Protocol (AMQP)
+- [x] ***`RabbitMQ`*** - For inter-service communication using Advanced Message Queue Protocol (AMQP)
+	Made 2 microservices communicate with each other using the AMQP protocol and the message was marshelled / unmarshalled using *`protobuf`*.
 
 - [ ] ***`kubernetes-e2e framework`*** - For performing end to end tests with Kubernetes
 
