@@ -32,7 +32,7 @@ deployments:
         # This deployment uses `kubectl` but you can also define `helm` deployments
         kubectl:
             manifests:
-                - ../../kubernetes/applications/sender/sender.deployment.yaml
+                - ../../kubernetes/applications/sender/**
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:

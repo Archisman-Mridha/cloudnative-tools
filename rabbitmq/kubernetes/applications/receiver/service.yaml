@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+    name: receiver-microservice-service
+    namespace: dev
+    labels:
+        app: receiver
+
+spec:
+    selector:
+        app: receiver-microservice-deployment
+
+    ports:
+        - name: default
+          port: 4000
+          targetPort: 4000
+          protocol: TCP

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+    name: sender-microservice-service
+    namespace: dev
+    labels:
+        app: sender
+
+spec:
+    selector:
+        app: sender-microservice-deployment
+
+    ports:
+        - name: default
+          port: 4000
+          targetPort: 4000
+          protocol: TCP
+
+    type: LoadBalancer
