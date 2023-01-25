@@ -1,55 +1,50 @@
 # Istio
 
-I am trying to integrate Istio with *`Traefik`* and *`Kubernetes Gateway API`*.
-
-# Installation
-
-First we will install Istio and *`Kiali`*. -
+Run these commands to install and setup Istio -
 
 ```bash
 helm repo add istio https://istio-release.storage.googleapis.com/charts
 helm repo add kiali https://kiali.org/helm-charts
 helm repo update
 
+# installing Istio
 helm install istio-base istio/base -n istio-system --create-namespace
 helm install istiod istio/istiod -n istio-system --wait
 
-helm install --namespace istio-system kiali-server kiali/kiali-server --set auth.strategy="anonymous"
+# installing Kiali dashboard
+helm install --namespace istio-system kiali-server kiali/kiali-server --set auth.strategy="anonymous" --wait
 
-# labeling the namespaces where Istio injection will be enabled
-kubectl label namespace dev istio-injection=enabled
-```
-
-Next, we will install some Istio integrations - *`Jaeger`* for distributed tracing and *`Prometheus`* and *`Grafana`* for monitoring.
-
-```bash
+# installing Istio integrations - `Jaeger` for distributed tracing and `Prometheus` and `Grafana` for monitoring
 kubectl apply -f "https://raw.githubusercontent.com/istio/istio/release-1.16/samples/addons/jaeger.yaml"
-
 kubectl apply -f "https://raw.githubusercontent.com/istio/istio/release-1.16/samples/addons/prometheus.yaml"
 kubectl apply -f "https://raw.githubusercontent.com/istio/istio/release-1.16/samples/addons/grafana.yaml"
+
+# installing Istio ingress gateway
+helm install istio-ingressgateway istio/gateway -n istio-system --wait
+
+# enabling Istio sidecar injection in the `default` namespace
+kubectl label namespace default istio-injection=enabled
 ```
 
-Next, we will install Kubernetes Gateway API and Traefik -
+You can access Kiali dashboard at https://loacalhost:20001 by running this command -
 
 ```bash
-kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/standard-install.yaml"
-
-helm repo add traefik https://helm.traefik.io/traefik
-helm repo update
-helm install traefik --set experimental.kubernetesGateway.enabled=true traefik/traefik
+kubectl port-forward svc/kiali 20001:20001 -n istio-system
 ```
 
-After this we will enable mTLS in the **dev** namespace. In this namespace, our microservices will run. Just apply this manifest -
+## Exposing whoami application
 
-```yaml
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
+First, lets deploy the whoami application at **../traefik-with-kubernetes-gateway-api/applications/whoami** by running -
 
-metadata:
-    name: peer-authentication
-    namespace: dev
-
-spec:
-    mtls:
-        mode: STRICT
+```bash
+kubectl apply -f ../traefik-with-kubernetes-gateway-api/applications/whoami
 ```
+
+Now, we will create a *`Gateway`* and a *`VirtualService`* to expose this application. Run these commands -
+
+```bash
+kubectl apply -f ./manifests/gateway.yaml
+kubectl apply -f ./manifests/whoami.virtualservice.yaml
+```
+
+The whoami application now is accessible at http://whoami.127.0.0.1.nip.io/

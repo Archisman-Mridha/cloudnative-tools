@@ -28,6 +28,8 @@
 
 - [ ] *`Cilium Service Mesh`* - Service mesh for Kubernetes powered by eBPF. I have plans to integrate Istio with Cilium, Traefik and Kubernetes Gateway Api.
 
+	> I use WSL2 and currently I am having problems running eBPF programs and Cilium in WSL2. So intead, I will explore *`Istio`* for temporary usage.
+
 - [ ] *`kubernetes-e2e framework`* - For performing end to end tests with Kubernetes
 
 - [ ] *`Cert Manager`* - Automated TLS certificate management in Kubernetes
