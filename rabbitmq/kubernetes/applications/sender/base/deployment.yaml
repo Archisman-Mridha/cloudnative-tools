@@ -3,11 +3,13 @@ kind: Deployment
 
 metadata:
     name: sender-microservice-deployment
-    namespace: dev
+    namespace: microservices
     labels:
         app: sender
 
 spec:
+    replicas: 1
+
     selector:
         matchLabels:
             app: sender
@@ -20,8 +22,8 @@ spec:
         spec:
             containers:
                 - name: sender-microservice
-                  image: archismanmridha/rabbitmq-sender-microservice:2.0.0
-                  imagePullPolicy: IfNotPresent
+                  image: archismanmridha/rabbitmq-sender-microservice:1.0.0
+                  imagePullPolicy: Always
                   resources:
                     limits:
                         cpu: 200m
@@ -29,3 +31,6 @@ spec:
                   ports:
                     - containerPort: 4000
                       protocol: TCP
+                  env:
+                    - name: RABBITMQ_CLUSTER_ADDRESS
+                      value: amqp://user:password@rabbitmq-cluster.rabbitmq-system.svc.cluster.local:5672/

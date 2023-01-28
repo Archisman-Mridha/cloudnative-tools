@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var GRPCServerPort= flag.String("port", "localhost:4000", "Port where gRPC server will listen")
+var GRPCServerPort= flag.String("port", "0.0.0.0:4000", "Port where gRPC server will listen")
 
 func CreateGRPCServer(setupGrpcServer func(*grpc.Server)) *grpc.Server {
 

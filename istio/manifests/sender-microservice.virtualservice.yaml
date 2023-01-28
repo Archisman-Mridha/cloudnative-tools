@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+    name: sender-microservice-virtualservice
+    namespace: microservices
+
+spec:
+    hosts:
+        - sender-microservice.127.0.0.1.nip.io
+    gateways:
+        - istio-system/gateway
+    http:
+        - route:
+            - destination:
+                  host: sender-microservice-service
+                  port:
+                      number: 4000
+              weight: 100

@@ -1,5 +1,5 @@
 create-cluster:
-	k3d cluster create --config ./cluster.config.yaml
+	k3d cluster create cloudnative-tools-testing --config ./cluster.config.yaml
 
 start-cluster:
 	k3d cluster start cloudnative-tools-testing

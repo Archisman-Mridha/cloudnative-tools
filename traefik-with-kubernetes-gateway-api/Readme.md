@@ -15,12 +15,12 @@ I suggest going through these resources -
 First we will install Traefik and Kubernetes Gateway API. Run these commands -
 
 ```bash
-kubectl apply -k "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.0" --wait
+kubectl apply -k "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.0"
 
 helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
 helm install traefik --set experimental.kubernetesGateway.enabled=true \
-    -n traefik --create-namespace traefik/traefik
+    -n traefik --create-namespace traefik/traefik --wait
 ```
 
 Now, you can expose the Traefik dashboard to your localhost by running these commands -
@@ -57,6 +57,4 @@ kubectl apply -f ./providers/kubernetes-gateway-api/gateway.yaml
 kubectl apply -f ./providers/kubernetes-gateway-api/whoami.httproute.yaml
 ```
 
-Now you can access the whoami application at http://whoami-new.127.0.0.1.nip.io/.
-
-## Exposing Larger Applications
+Now you can access the whoami application at http://whoami.127.0.0.1.nip.io/.

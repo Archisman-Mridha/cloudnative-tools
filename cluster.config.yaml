@@ -1,8 +1,6 @@
 apiVersion: k3d.io/v1alpha3
 kind: Simple
 
-name: cloudnative-tools-testing
-
 servers: 1
 agents: 2
 

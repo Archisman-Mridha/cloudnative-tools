@@ -22,7 +22,7 @@ pipelines:
 # We recommend to skip image building during development (devspace dev) as much as possible
 images:
     app:
-        image: archismanmridha/rabbitmq-sender-microservice:2.0.0
+        image: archismanmridha/rabbitmq-sender-microservice:1.0.0
         dockerfile: ../../dockerfiles/sender.dockerfile
         context: ../../
 
@@ -31,8 +31,9 @@ deployments:
     app:
         # This deployment uses `kubectl` but you can also define `helm` deployments
         kubectl:
+            kustomize: true
             manifests:
-                - ../../kubernetes/applications/sender/**
+                - ../../kubernetes/applications/sender/overlays/development
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:

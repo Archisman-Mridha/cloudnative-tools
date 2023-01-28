@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/streadway/amqp"
 	"google.golang.org/protobuf/proto"
@@ -16,21 +17,26 @@ var (
 
 func main( ) {
 
-	//* connecting to rabbitMQ
-	rabbitMQConnection, error := amqp.Dial("amqp://user:password@10.43.79.24:5672/")
+	//! connecting to rabbitMQ
+
+	rabbitMQClusterAddress, isEnvFound := os.LookupEnv("RABBITMQ_CLUSTER_ADDRESS")
+	if !isEnvFound {
+		log.Fatal("env RABBITMQ_CLUSTER_ADDRESS not found") }
+
+	rabbitMQConnection, error := amqp.Dial(rabbitMQClusterAddress)
 	if error != nil {
 		log.Fatal(error.Error( )) }
 
 	defer rabbitMQConnection.Close( )
 
-	//* creating a rabbitMQ channel
+	//! creating a rabbitMQ channel
 	RabbitMQChannel, error= rabbitMQConnection.Channel( )
 	if error != nil {
 		log.Fatal(error.Error( )) }
 
 	defer RabbitMQChannel.Close( )
 
-	//* consuming messages from the queue `Main`
+	//! consuming messages from the queue `Main`
 	newTestMessages, error := RabbitMQChannel.Consume(
 		"Main", "", true, false, false, false, nil)
 	if error != nil {

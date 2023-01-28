@@ -26,10 +26,17 @@
 - [x] *`RabbitMQ`* - For inter-service communication using Advanced Message Queue Protocol (AMQP)
 	Made 2 microservices communicate with each other using the AMQP protocol and the message was marshelled / unmarshalled using *`protobuf`*.
 
-- [ ] *`Cilium Service Mesh`* - Service mesh for Kubernetes powered by eBPF. I have plans to integrate Istio with Cilium, Traefik and Kubernetes Gateway Api.
+- [x] *`Istio Service Mesh`*
 
-	> I use WSL2 and currently I am having problems running eBPF programs and Cilium in WSL2. So intead, I will explore *`Istio`* for temporary usage.
+	> Initially I had plans to use the *`Cilium Service Mesh`* which is based on the eBPF technology. I use WSL2 and currently I am having problems running eBPF programs and Cilium in WSL2. So intead, I will explore *`Istio`* for temporary usage.
+
+- [ ] *`Observability`* -
+	+ *`Jaeger`* with *`OpenTelemetry`* for instrumenting my code and distributed tracing
+	+ *`Prometheus`* with *`Grafana`* for visualizing metrics
+	+ *`ElasticSearch`*, *`LogStash`* and *`Kibanna`* for logging
 
 - [ ] *`kubernetes-e2e framework`* - For performing end to end tests with Kubernetes
+
+- [ ] *`K6 Load testing`* - For perform load tests in Kubernetes
 
 - [ ] *`Cert Manager`* - Automated TLS certificate management in Kubernetes

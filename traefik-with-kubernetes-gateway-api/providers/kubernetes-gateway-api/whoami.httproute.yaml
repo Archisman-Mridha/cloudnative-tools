@@ -11,7 +11,7 @@ spec:
           sectionName: web
 
     hostnames:
-        - whoami-new.127.0.0.1.nip.io
+        - whoami.127.0.0.1.nip.io
 
     rules:
         - matches:

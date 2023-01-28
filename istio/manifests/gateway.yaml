@@ -12,6 +12,12 @@ spec:
         - port:
             number: 80
             name: http
-            protocol: http2
+            protocol: HTTP
           hosts:
             - whoami.127.0.0.1.nip.io
+        - port:
+            number: 80
+            name: grpc
+            protocol: grpc
+          hosts:
+            - sender-microservice.127.0.0.1.nip.io

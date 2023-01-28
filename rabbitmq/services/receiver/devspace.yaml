@@ -31,14 +31,15 @@ deployments:
     app:
         # This deployment uses `kubectl` but you can also define `helm` deployments
         kubectl:
+            kustomize: true
             manifests:
-                - ../../kubernetes/applications/receiver/receiver.deployment.yaml
+                - ../../kubernetes/applications/receiver/overlays/development
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:
     app:
         # Search for the container that runs this image
-        imageSelector: archismanmridha/rabbitmq-receiver-microservice:2.0.0
+        imageSelector: archismanmridha/rabbitmq-receiver-microservice:1.0.0
         # Replace the container image with this dev-optimized image (allows to skip image building during development)
         devImage: ghcr.io/loft-sh/devspace-containers/go:1.19-alpine
         # Sync files between the local filesystem and the development container

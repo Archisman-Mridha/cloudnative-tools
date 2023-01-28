@@ -3,18 +3,19 @@ kind: Service
 
 metadata:
     name: sender-microservice-service
-    namespace: dev
+    namespace: microservices
     labels:
         app: sender
 
 spec:
+    type: ClusterIP
+
     selector:
-        app: sender-microservice-deployment
+        app: sender
 
     ports:
-        - name: default
+        - name: grpc
           port: 4000
           targetPort: 4000
           protocol: TCP
-
-    type: LoadBalancer
+          appProtocol: grpc

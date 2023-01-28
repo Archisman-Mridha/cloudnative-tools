@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 	"shared/utils"
 
-	proto "github.com/golang/protobuf/proto"
 	"github.com/streadway/amqp"
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/proto"
 
 	protoGenerated "sender/proto/generated"
 )
@@ -51,21 +52,26 @@ var (
 
 func main( ) {
 
-	//* connecting to rabbitMQ
-	rabbitMQConnection, error := amqp.Dial("amqp://user:password@10.43.79.24:5672/")
+	//! connecting to rabbitMQ
+
+	rabbitMQClusterAddress, isEnvFound := os.LookupEnv("RABBITMQ_CLUSTER_ADDRESS")
+	if !isEnvFound {
+		log.Fatal("env RABBITMQ_CLUSTER_ADDRESS not found") }
+
+	rabbitMQConnection, error := amqp.Dial(rabbitMQClusterAddress)
 	if error != nil {
 		log.Fatal("error connecting to rabbitMQ \n", error.Error( )) }
 
 	defer rabbitMQConnection.Close( )
 
-	//* creating a rabbitMQ channel
+	//! creating a rabbitMQ channel
 	RabbitMQChannel, error= rabbitMQConnection.Channel( )
 	if error != nil {
 		log.Fatal("error creating a rabbitMQ channel \n", error.Error( )) }
 
 	defer RabbitMQChannel.Close( )
 
-	//* creating a queue
+	//! creating a queue
 	messageQueue, error := RabbitMQChannel.QueueDeclare(
 		"Main", false, false, false, false, nil)
 
@@ -76,7 +82,7 @@ func main( ) {
 
 	log.Println("connected to RabbitMQ and created the new queue `Main` 💫")
 
-	//* creating the gRPC server
+	//! creating the gRPC server
 	gRPCServer := utils.CreateGRPCServer(
 		func(gRPCServer *grpc.Server) {
 			protoGenerated.RegisterSenderServer(gRPCServer, &SenderServer{ })
