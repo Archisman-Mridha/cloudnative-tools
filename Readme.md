@@ -35,8 +35,9 @@
 	+ *`Prometheus`* with *`Grafana`* for visualizing metrics
 	+ *`ElasticSearch`*, *`LogStash`* and *`Kibanna`* for logging
 
-- [ ] *`kubernetes-e2e framework`* - For performing end to end tests with Kubernetes
-
-- [ ] *`K6 Load testing`* - For perform load tests in Kubernetes
+- [ ] *`Testing`* -
+	+ *`kubernetes-e2e framework`* for performing end to end tests inside Kubernetes
+	+ *`K6 Load testing`* for performing load tests
+	+ *`Litmus Chaos`* for chaos testing
 
 - [ ] *`Cert Manager`* - Automated TLS certificate management in Kubernetes
