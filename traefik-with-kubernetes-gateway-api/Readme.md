@@ -1,6 +1,6 @@
 # Traefik with Kubernetes Gateway API
 
-Traefik is an *`ingress controller`* like NGINX. And Kubernetes Gateway API acts like a *`provider`* enabling **RBAC integration with traffic routing**.
+Traefik is an `ingress controller` like NGINX. And Kubernetes Gateway API acts like a `provider` enabling **RBAC integration with traffic routing**.
 
 ## Resources Used
 
@@ -39,9 +39,9 @@ Lets say, we want to expose the Traefik dashboard permanently to the localhost, 
 
 First, we need to create a Kubernetes Service for the Traefik dashboard, which you can find here - **./applications/traefik-dashboard/service.yaml**.
 
-+ Now if we want to use *`Kubernetes Ingress as a provider`*, we can apply the manifest at **./providers/kubernetes-ingress/traefik-dashboard.ingress.yaml**.
++ Now if we want to use `Kubernetes Ingress as a provider`, we can apply the manifest at **./providers/kubernetes-ingress/traefik-dashboard.ingress.yaml**.
 
-+ If instead, we want to use *`Kubernetes Gateway API as a provider`*, we can apply the manifest at **./providers/kubernetes-gateway-api/traefik-dashboard.httproute.yaml**.
++ If instead, we want to use `Kubernetes Gateway API as a provider`, we can apply the manifest at **./providers/kubernetes-gateway-api/traefik-dashboard.httproute.yaml**.
 
 The dashboard can be accessed at http://dashboard.traefik.127.0.0.1.nip.io/dashboard/#/.
 
@@ -49,7 +49,7 @@ The dashboard can be accessed at http://dashboard.traefik.127.0.0.1.nip.io/dashb
 
 We will try to expose a sample **whoami** application using Traefik and Kubernetes Gateway API as the provider.
 
-First apply the manifests at **./applications/whoami**. This creates the Deployment and Service objects. Next, run these commands to create the *`GatewayClass`*, *`Gateway`* and *`HTTPRoute`* resources -
+First apply the manifests at **./applications/whoami**. This creates the Deployment and Service objects. Next, run these commands to create the `GatewayClass`, `Gateway` and `HTTPRoute` resources -
 
 ```bash
 kubectl apply -f ./providers/kubernetes-gateway-api/gatewayclass.yaml
