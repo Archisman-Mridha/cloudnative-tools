@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pg-credentials
+type: Opaque
+stringData:
+  uri: postgres://users:6wB9Y3heSoJzgFYsLTHWjbanc4T9X7wcALX3MR5a3uLjV4JRPCElylfRhbjgbxKI@main-rw.default.svc.cluster.local:5432/users?sslmode=disable
+
+---
+
+apiVersion: db.atlasgo.io/v1alpha1
+kind: AtlasSchema
+metadata:
+  name: pg-migrations
+spec:
+  # Load the URL of the target database from a Kubernetes secret.
+  urlFrom:
+    secretKeyRef:
+      key: uri
+      name: pg-credentials
+  # Define the desired schema of the target database. This can be defined in either
+  # plain SQL like this example or in Atlas HCL.
+  schema:
+    sql: |
+      CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+
+        email VARCHAR(255) NOT NULL UNIQUE,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(50) NOT NULL
+      );

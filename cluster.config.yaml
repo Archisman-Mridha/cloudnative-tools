@@ -15,6 +15,6 @@ ports:
 options:
     k3s:
         extraArgs:
-            - arg: --no-deploy=traefik
+            - arg: --disable=traefik
               nodeFilters:
                 - server:*

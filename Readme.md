@@ -30,14 +30,4 @@
 
 	> Initially I had plans to use the `Cilium Service Mesh` which is based on the eBPF technology. I use WSL2 and currently I am having problems running eBPF programs and Cilium in WSL2. So intead, I will explore `Istio` for temporary usage.
 
-- [ ] `Observability` -
-	+ `Jaeger` with `OpenTelemetry` for instrumenting my code and distributed tracing
-	+ `Prometheus` with `Grafana` for visualizing metrics
-	+ `ElasticSearch`, `LogStash` and `Kibanna` for logging
-
-- [ ] `Testing` -
-	+ `kubernetes-e2e framework` for performing end to end tests inside Kubernetes
-	+ `K6 Load testing` for performing load tests
-	+ `Litmus Chaos` for chaos testing
-
-- [ ] `Cert Manager` - Automated TLS certificate management in Kubernetes
+- [x] `Cloudnative PG` with `Atlas` (for executing database migrations in a Kubernetes native manner).
