@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: POSTGRES_CLUSTER_URL
-              value: postgres://users:6wB9Y3heSoJzgFYsLTHWjbanc4T9X7wcALX3MR5a3uLjV4JRPCElylfRhbjgbxKI@main-rw.default.svc.cluster.local:5432/users?sslmode=disable
+              value: postgres://users:pass@main-rw.default.svc.cluster.local:5432/users?sslmode=disable
           resources:
             limits:
               memory: 128Mi

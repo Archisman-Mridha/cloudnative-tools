@@ -21,3 +21,19 @@ spec:
   bootstrap:
     initdb:
       database: users
+      owner: users
+      secret:
+        name: main-app
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: main-app
+  namespace: default
+type: kubernetes.io/basic-auth
+
+data:
+  username: dXNlcnM=
+  password: cGFzcw==
