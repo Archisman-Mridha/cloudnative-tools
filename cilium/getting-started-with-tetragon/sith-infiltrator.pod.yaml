@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sith-infiltrator
+spec:
+
+  ## Share process namespace with the host machine.
+  hostPID: true
+
+  ## Share network namespace with the host machine.
+  hostNetwork: true
+
+  containers:
+    - name: sith-infiltrator
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+      securityContext:
+        privileged: true
+      resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
