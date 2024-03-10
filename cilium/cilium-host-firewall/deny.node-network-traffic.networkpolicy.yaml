@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: deny-node-network-traffic
+
+spec:
+  description: Block all unknown traffic to nodes
+  nodeSelector: {}
+  ingress:
+    ## Only allows global traffic if it comes from within the cluster.
+    - fromEntities:
+        - cluster
