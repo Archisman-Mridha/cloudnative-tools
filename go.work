@@ -1,8 +1,0 @@
-go 1.19
-
-use (
-	./cloudnative-pg/demo-client
-	./rabbitmq/services/receiver
-	./rabbitmq/services/sender
-	./rabbitmq/shared
-)

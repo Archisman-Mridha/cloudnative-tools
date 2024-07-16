@@ -1,8 +1,0 @@
-syntax= "proto3";
-
-package sender;
-option go_package="sender/rabbitmq/proto";
-
-message TestMessage {
-    string message= 1;
-}
